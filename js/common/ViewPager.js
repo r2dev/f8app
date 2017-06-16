@@ -138,11 +138,13 @@ class ViewPager extends React.Component {
   renderContent(): Array<ReactElement> {
     var {width, height} = this.state;
     var style = Platform.OS === 'ios' && styles.card;
-    return React.Children.map(this.props.children, (child, i) => (
-      <View style={[style, {width, height}]} key={'r_' + i}>
-        {child}
-      </View>
-    ));
+    return React.Children.map(this.props.children, (child, i) => {
+      return child == null
+        ? null
+        : <View style={[style, { width, height }]} key={"r_" + i}>
+            {child}
+          </View>;
+    });
   }
 
   handleHorizontalScroll(e: any) {
